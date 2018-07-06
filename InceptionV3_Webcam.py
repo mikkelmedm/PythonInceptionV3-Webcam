@@ -13,11 +13,17 @@ print("I'm working...")
 model = InceptionV3(weights='imagenet')
 graph = tf.get_default_graph()
 
+text1=""
+text2=""
+text3=""
 value1=""
 value2=""
+value3=""
+
 threads = []
   
-font = ImageFont.truetype("FiraSans-Regular.ttf", 48) 
+font = ImageFont.truetype("FiraSans-Regular.ttf", 28)
+font1 = ImageFont.truetype("FiraSans-Regular.ttf", 20) 
 
 video_capture = cv2.VideoCapture(0)
 
@@ -46,27 +52,49 @@ def analyze():
                 # out holds the top 5 predictions:        
                 out = decode_predictions(preds, top=5)[0]
                     
-                output = str(out[0][1])
-                cleaned = output.replace("_", " ")
-                prob = str("{:.2%}".format(out[0][2]))
+                output1 = str(out[0][1])
+                output2 = str(out[1][1])
+                output3 = str(out[2][1])
+                #print(output1,output2,output3)
+                cleaned1 = output1.replace("_", " ")
+                cleaned2 = output2.replace("_", " ")
+                cleaned3 = output3.replace("_", " ")
+
+                prob1 = str("{:.2%}".format(out[0][2]))
+                prob2 = str("{:.2%}".format(out[1][2]))
+                prob3 = str("{:.2%}".format(out[2][2]))
+
                 #print(cleaned)
             
-                cleaned = "{}".format(cleaned)
-                prob = "{}".format(prob)
+                cleaned1 = "{}".format(cleaned1)
+                cleaned2 = "{}".format(cleaned2)
+                cleaned3 = "{}".format(cleaned3)
+
+                prob1 = "{}".format(prob1)
+                prob2 = "{}".format(prob2)
+                prob3 = "{}".format(prob3)
             
-                analyzevalues(cleaned,prob)
+                analyzevalues(cleaned1,cleaned2,cleaned3,prob1,prob2,prob3)
 
         else:
             break
 
 
 
-def analyzevalues(clean,prb):
-    print(clean,prb)
+def analyzevalues(clean1,clean2,clean3,prb1,prb2,prb3):
+    print(clean1,prb1,clean2,prb2,clean3,prb3)
+    global text1
+    text1 = clean1
     global value1
-    value1 = clean
+    value1 = prb1
+    global text2
+    text2 = clean2
     global value2
-    value2 = prb
+    value2 = prb2
+    global text3
+    text3 = clean3
+    global value3
+    value3 = prb3
 
 
 def run():
@@ -85,9 +113,18 @@ def run():
    
         draw = ImageDraw.Draw(pil_im)   
    
-        # Draw the text  
-        draw.text((10, 370), value1, font=font)
-        draw.text((10, 420), value2, font=font)  
+        # Draw the text 
+        draw.text((4, 325), "1.", font=font) 
+        draw.text((24, 325), text1, font=font)
+        draw.text((24, 351), value1, font=font1)
+        
+        draw.text((4, 375), "2.", font=font)
+        draw.text((24, 375), text2, font=font)
+        draw.text((24, 401), value2, font=font1)
+        
+        draw.text((4, 430), "3.", font=font)
+        draw.text((24, 430), text3, font=font)
+        draw.text((24, 456), value3, font=font1)  
    
         # Get back the image to OpenCV  
         cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
