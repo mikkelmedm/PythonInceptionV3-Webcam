@@ -45,7 +45,8 @@ Then press ctrl+c in the Command prompt window to kill the process entirely.
 - Everything is now installed, and the program can be runned by abovementioned method.
 
 
-- IF the computer has been shut down or the directory in the Command prompt has been changed, to run the program, you simply have to navigate to the folder where the program is, and run the program again:
+
+IF the computer has been shut down or the directory in the Command prompt has been changed, to run the program, you simply have to navigate to the folder where the program is, and run the program again:
 
 In Command prompt take the following steps:
 
