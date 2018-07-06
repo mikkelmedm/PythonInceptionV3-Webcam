@@ -9,6 +9,7 @@ In the installer, check the box "Add Python 3.6 to PATH" and press install now:
 
 
 Open command prompt from:
+
 Press the windows key on the keyboard and type "command.." until you see command prompt pop up.
 
 
