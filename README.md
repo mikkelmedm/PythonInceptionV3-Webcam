@@ -49,6 +49,10 @@ Then press ctrl+c in the Command prompt window to kill the process.
 In Command prompt take the following steps:
 
 cd Downloads
+
 cd PythonInceptionV3-Webcam-master
+
 cd PythonInceptionV3-Webcam-master
+
 python InceptionV3_Webcam.py
+
