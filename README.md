@@ -34,3 +34,21 @@ cd PythonInceptionV3-Webcam-master
 
 pip install -r requirements.txt
 
+- To run the program: then type/paste the following and hit enter:
+python InceptionV3_Webcam.py
+
+The computer will now download the model for the recognition algorithm and run the program in fullscreen
+
+To exit the program press the opened window followed by 'q' on the keyboard. 
+Then press ctrl+c in the Command prompt window to kill the process.
+
+- Now everything is installed, and the program can be runned by abovementioned method.
+
+- If the computer has been shut down or the directory in the Command prompt has been changed, to run the program, you simply have to navigate to the folder where the program is, and run the program again:
+
+In Command prompt take the following steps:
+
+cd Downloads
+cd PythonInceptionV3-Webcam-master
+cd PythonInceptionV3-Webcam-master
+python InceptionV3_Webcam.py
