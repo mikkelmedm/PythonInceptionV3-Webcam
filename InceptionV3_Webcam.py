@@ -7,6 +7,7 @@ import cv2
 import tensorflow as tf
 import time
 from threading import Thread
+from PIL import ImageFont, ImageDraw, Image
 
 print("I'm working...")
 model = InceptionV3(weights='imagenet')
@@ -15,6 +16,8 @@ graph = tf.get_default_graph()
 value1=""
 value2=""
 threads = []
+  
+font = ImageFont.truetype("FiraSans-Regular.ttf", 48) 
 
 video_capture = cv2.VideoCapture(0)
 
@@ -73,9 +76,23 @@ def run():
         frame = cv2.flip(frame,1)
         cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
         cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
-        cv2.putText(frame, value1,(200, 440), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255))
-        cv2.putText(frame, value2,(200, 470), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255))
-        cv2.imshow('window', frame)
+        
+        # Convert the image to RGB (OpenCV uses BGR)  
+        cv2_im_rgb = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)  
+   
+        # Pass the image to PIL  
+        pil_im = Image.fromarray(cv2_im_rgb)  
+   
+        draw = ImageDraw.Draw(pil_im)   
+   
+        # Draw the text  
+        draw.text((10, 370), value1, font=font)
+        draw.text((10, 420), value2, font=font)  
+   
+        # Get back the image to OpenCV  
+        cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
+
+        cv2.imshow('window', cv2_im_processed)
         k = cv2.waitKey(5) & 0xFF
         if k == ord('q'):
             break   
