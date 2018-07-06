@@ -19,14 +19,18 @@ Press the windows key on the keyboard and type "command.." until you see Command
 
 
 - In Command prompt type/paste the following and hit enter:
+
 cd Downloads
 
-- Then type/paste and hit enter:
+- Then type/paste the following and hit enter:
+
 cd PythonInceptionV3-Webcam-master
 
 - And do the same again:
+
 cd PythonInceptionV3-Webcam-master
 
-- Then type/paste:
+- Then type/paste the following and hit enter:
+
 pip install -r requirements.txt
 
