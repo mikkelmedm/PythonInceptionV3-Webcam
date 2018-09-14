@@ -33,6 +33,46 @@ font4 = ImageFont.truetype("FiraSans-BoldItalic.ttf", 22)
 font5 = ImageFont.truetype("FiraSans-Regular.ttf", 15)
 
 
+blackimg = np.zeros([720,1280,3],dtype=np.uint8)
+blackimg.fill(255)
+blackimgimg = cv2.cvtColor(blackimg,cv2.COLOR_BGR2RGB)
+
+#Pass the image to PIL
+pil_im_black = Image.fromarray(blackimgimg)
+
+drawblack = ImageDraw.Draw(pil_im_black)
+
+# Draw the text of infoscreen:
+drawblack.text((70, 20), "Überliste den Algorithmus", font=font2, fill=(0))
+drawblack.text((70, 45), "Tricking the Algorithm", font=font4, fill=(0))
+drawblack.text((70, 99), "Støj (Andreas Refsgaard, Lasse Korsgaard) | Kopenhagen, Dänemark | 2018)", font=font5, fill=(0))
+
+drawblack.text((70, 130), "Menschen können Bilder recht problemlos deuten, auch wenn", font=font11, fill=(0))
+drawblack.text((70, 152), "Größe, Maßstab und Position der darauf gezeigten Objekte ", font=font11, fill=(0))
+drawblack.text((70, 174), "eher unüblich sind. Damit eine Künstliche Intelligenz Bilder", font=font11, fill=(0))
+drawblack.text((70, 196), "sicher analysiert, muss sie ausgiebig trainiert werden.", font=font11, fill=(0))
+drawblack.text((70, 218), "Durch den Einsatz von maschinellem Lernen funktioniert", font=font11, fill=(0))
+drawblack.text((70, 240), "das heute schon recht zuverlässig. Jedoch kann Erkennungssoftware", font=font11, fill=(0))
+drawblack.text((70, 262), "schon durch kleine Änderungen in der Bildvorlage", font=font11, fill=(0))
+drawblack.text((70, 284), "getäuscht werden. Durch solche Fehlanalysen können falsche", font=font11, fill=(0))
+drawblack.text((70, 306), "Behauptungen entstehen und Personen geschädigt werden.", font=font11, fill=(0))
+drawblack.text((70, 350), "Die Anwendung macht spielerisch auf das Problem aufmerksam.", font=font11, fill=(0))
+drawblack.text((70, 372), "Teste es hier selbst!", font=font11, fill=(0))
+
+drawblack.text((70, 416), "People can interpret images fairly easily, even if the size,", font=font3, fill=(0))
+drawblack.text((70, 438), "scale and position of the objects being shown are unusual.", font=font3, fill=(0))
+drawblack.text((70, 460), "To ensure that artificial intelligence can analyse images", font=font3, fill=(0))
+drawblack.text((70, 482), "accurately, it must be extensively trained. This is already", font=font3, fill=(0))
+drawblack.text((70, 504), "fairly reliable with the help of machine learning. But", font=font3, fill=(0))
+drawblack.text((70, 526), "recognition software can be »fooled« by minor changes", font=font3, fill=(0))
+drawblack.text((70, 548), "to the reference images alone. Inaccurate analyses can", font=font3, fill=(0))
+drawblack.text((70, 570), "result in false accusations and damage to individuals.", font=font3, fill=(0))
+drawblack.text((70, 614), "This application highlights the problem playfully.", font=font3, fill=(0))
+drawblack.text((70, 636), "Test it here yourself!", font=font3, fill=(0))
+
+blackimgprocessed = cv2.cvtColor(np.array(pil_im_black), cv2.COLOR_RGB2BGR)
+
+
 video_capture = cv2.VideoCapture(0)
 video_capture.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
 video_capture.set(3,2000) # set width - here it is set to max resolution
@@ -120,6 +160,8 @@ def run():
     # Assigning our static_back to None
     static_back = None
     timer = 0
+    # Create a blank image
+
 
 
     while True:
@@ -128,13 +170,7 @@ def run():
         cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
         cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
 
-
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-        # Create a black image
-
-        blackimg = np.zeros([gray.shape[0],gray.shape[1],3],dtype=np.uint8)
-        blackimg.fill(255)
 
         # In first iteration we assign the value
         # of static_back to our first frame
@@ -149,13 +185,6 @@ def run():
         pil_im = Image.fromarray(cv2_im_rgb)
 
         draw = ImageDraw.Draw(pil_im)
-
-        blackimgimg = cv2.cvtColor(blackimg,cv2.COLOR_BGR2RGB)
-
-        #Pass the image to PIL
-        pil_im_black = Image.fromarray(blackimgimg)
-
-        drawblack = ImageDraw.Draw(pil_im_black)
 
 
         # # Outline 1. text with black
@@ -219,39 +248,12 @@ def run():
         draw.text((24, 630), text3, font=font)
         draw.text((24, 656), value3, font=font1)
 
-        # Draw the text of infoscreen:
-        drawblack.text((70, 20), "Überliste den Algorithmus", font=font2, fill=(0))
-        drawblack.text((70, 45), "Tricking the Algorithm", font=font4, fill=(0))
-        drawblack.text((70, 99), "Støj (Andreas Refsgaard, Lasse Korsgaard) | Kopenhagen, Dänemark | 2018)", font=font5, fill=(0))
 
-        drawblack.text((70, 130), "Menschen können Bilder recht problemlos deuten, auch wenn", font=font11, fill=(0))
-        drawblack.text((70, 152), "Größe, Maßstab und Position der darauf gezeigten Objekte ", font=font11, fill=(0))
-        drawblack.text((70, 174), "eher unüblich sind. Damit eine Künstliche Intelligenz Bilder", font=font11, fill=(0))
-        drawblack.text((70, 196), "sicher analysiert, muss sie ausgiebig trainiert werden.", font=font11, fill=(0))
-        drawblack.text((70, 218), "Durch den Einsatz von maschinellem Lernen funktioniert", font=font11, fill=(0))
-        drawblack.text((70, 240), "das heute schon recht zuverlässig. Jedoch kann Erkennungssoftware", font=font11, fill=(0))
-        drawblack.text((70, 262), "schon durch kleine Änderungen in der Bildvorlage", font=font11, fill=(0))
-        drawblack.text((70, 284), "getäuscht werden. Durch solche Fehlanalysen können falsche", font=font11, fill=(0))
-        drawblack.text((70, 306), "Behauptungen entstehen und Personen geschädigt werden.", font=font11, fill=(0))
-        drawblack.text((70, 350), "Die Anwendung macht spielerisch auf das Problem aufmerksam.", font=font11, fill=(0))
-        drawblack.text((70, 372), "Teste es hier selbst!", font=font11, fill=(0))
-
-        drawblack.text((70, 416), "People can interpret images fairly easily, even if the size,", font=font3, fill=(0))
-        drawblack.text((70, 438), "scale and position of the objects being shown are unusual.", font=font3, fill=(0))
-        drawblack.text((70, 460), "To ensure that artificial intelligence can analyse images", font=font3, fill=(0))
-        drawblack.text((70, 482), "accurately, it must be extensively trained. This is already", font=font3, fill=(0))
-        drawblack.text((70, 504), "fairly reliable with the help of machine learning. But", font=font3, fill=(0))
-        drawblack.text((70, 526), "recognition software can be »fooled« by minor changes", font=font3, fill=(0))
-        drawblack.text((70, 548), "to the reference images alone. Inaccurate analyses can", font=font3, fill=(0))
-        drawblack.text((70, 570), "result in false accusations and damage to individuals.", font=font3, fill=(0))
-        drawblack.text((70, 614), "This application highlights the problem playfully.", font=font3, fill=(0))
-        drawblack.text((70, 636), "Test it here yourself!", font=font3, fill=(0))
 
 
         # Get back the image to OpenCV
         cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
 
-        blackimgprocessed = cv2.cvtColor(np.array(pil_im_black), cv2.COLOR_RGB2BGR)
 
         # Show window if there is a difference from the first frame,
         # Otherwise show infoscreen
@@ -264,7 +266,7 @@ def run():
         #     break
         if score >= 0.9 :
             timer+=1
-            if timer > 50 :
+            if timer > 25 :
                 cv2.imshow('window',blackimgprocessed)
                 k = cv2.waitKey(5) & 0xFF
                 print("slærm",timer)
