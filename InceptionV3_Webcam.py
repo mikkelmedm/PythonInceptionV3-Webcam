@@ -264,7 +264,7 @@ def run():
         #     break
         if score >= 0.9 :
             timer+=1
-            if timer > 25 :
+            if timer > 50 :
                 cv2.imshow('window',blackimgprocessed)
                 k = cv2.waitKey(5) & 0xFF
                 print("slærm",timer)
