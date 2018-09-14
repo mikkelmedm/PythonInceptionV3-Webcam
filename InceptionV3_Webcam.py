@@ -32,7 +32,7 @@ font3 = ImageFont.truetype("FiraSans-Italic.ttf", 18)
 font4 = ImageFont.truetype("FiraSans-BoldItalic.ttf", 22)
 font5 = ImageFont.truetype("FiraSans-Regular.ttf", 15)
 
-
+# Create a blank image:
 blackimg = np.zeros([720,1280,3],dtype=np.uint8)
 blackimg.fill(255)
 blackimgimg = cv2.cvtColor(blackimg,cv2.COLOR_BGR2RGB)
@@ -160,10 +160,7 @@ def run():
     # Assigning our static_back to None
     static_back = None
     timer = 0
-    # Create a blank image
-
-
-
+    
     while True:
         ret, frame = video_capture.read()
         frame = cv2.flip(frame,1)
@@ -185,7 +182,6 @@ def run():
         pil_im = Image.fromarray(cv2_im_rgb)
 
         draw = ImageDraw.Draw(pil_im)
-
 
         # # Outline 1. text with black
         # draw.text((4-1, 325), "1.", font=font, fill=(0))
@@ -249,21 +245,13 @@ def run():
         draw.text((24, 656), value3, font=font1)
 
 
-
-
         # Get back the image to OpenCV
         cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
 
-
         # Show window if there is a difference from the first frame,
         # Otherwise show infoscreen
-
         (score, diff) = compare_ssim(static_back, gray, full=True)
 
-        # cv2.imshow('window',blackimgprocessed)
-        # k = cv2.waitKey(5) & 0xFF
-        # if k == ord('q'):
-        #     break
         if score >= 0.9 :
             timer+=1
             if timer > 25 :
