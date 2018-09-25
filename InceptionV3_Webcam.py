@@ -32,7 +32,7 @@ font3 = ImageFont.truetype("FiraSans-Italic.ttf", 18)
 font4 = ImageFont.truetype("FiraSans-BoldItalic.ttf", 22)
 font5 = ImageFont.truetype("FiraSans-Regular.ttf", 15)
 
-# Create a blank image:
+
 blackimg = np.zeros([720,1280,3],dtype=np.uint8)
 blackimg.fill(255)
 blackimgimg = cv2.cvtColor(blackimg,cv2.COLOR_BGR2RGB)
@@ -77,11 +77,11 @@ video_capture = cv2.VideoCapture(0)
 video_capture.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
 video_capture.set(3,2000) # set width - here it is set to max resolution
 video_capture.set(4,2000)   # set height - here it is set to max reoslution
-video_capture.set(10, 120  ) # brightness     min: 0   , max: 255 , increment:1
+video_capture.set(10, 150  ) # brightness     min: 0   , max: 255 , increment:1
 # video_capture.set(11, 50   ) # contrast       min: 0   , max: 255 , increment:1
 # video_capture.set(12, 70   ) # saturation     min: 0   , max: 255 , increment:1
 # video_capture.set(14, 50   ) # gain           min: 0   , max: 127 , increment:1
-video_capture.set(15, -4   ) # exposure       min: -7  , max: -1  , increment:1
+video_capture.set(15, -2   ) # exposure       min: -7  , max: -1  , increment:1
 # video_capture.set(17, 5000 ) # white balance
 
 
@@ -118,21 +118,183 @@ def analyze():
                 cleaned2 = output2.replace("_", " ")
                 cleaned3 = output3.replace("_", " ")
 
-                prob1 = str("{:.2%}".format(out[0][2]))
-                prob2 = str("{:.2%}".format(out[1][2]))
-                prob3 = str("{:.2%}".format(out[2][2]))
+                if cleaned1 == "toaster":
+                    if out[0][2] > 0 and out[0][2] < 30:
+                        prob = out[0][2] * 1.5
+                        prob1,prob2,prob3=toaster(prob,out[1][2],out[2][2])
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("gange med 1.5")
+                    elif out[0][2] >= 30 and out[0][2] < 50:
+                        prob = out[0][2] * 1.3
+                        prob1,prob2,prob3=toaster(prob,out[1][2],out[2][2])
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("gange med 1.3")
+                    elif out[0][2] >= 50 and out[0][2] < 70:
+                        prob = out[0][2] * 1.2
+                        prob1,prob2,prob3=toaster(prob,out[1][2],out[2][2])
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("gange med 1.2")
+                    else:
+                        prob1,prob2,prob3=toaster(out[0][2],out[1][2],out[2][2])
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("gange med ikkenoget")
 
-                #print(cleaned)
+                    analyzevalues(cleaned1,cleaned2,cleaned3,prob1,prob2,prob3)
 
-                cleaned1 = "{}".format(cleaned1)
-                cleaned2 = "{}".format(cleaned2)
-                cleaned3 = "{}".format(cleaned3)
+                if cleaned2 == "toaster":
+                    if out[1][2] > 0 and out[1][2] < 30:
+                        prob = out[1][2] * 1.5
+                        prob1,prob2,prob3=toaster(out[0][2],prob,out[2][2])
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("2-gange med 1.5")
+                    elif out[1][2] >= 30 and out[1][2] < 50:
+                        prob = out[1][2] * 1.3
+                        prob1,prob2,prob3=toaster(out[0][2],prob,out[2][2])
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("2-gange med 1.3")
+                    elif out[1][2] >= 50 and out[1][2] < 70:
+                        prob = out[1][2] * 1.2
+                        prob1,prob2,prob3=toaster(out[0][2],prob,out[2][2])
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("2-gange med 1.2")
+                    else:
+                        prob1,prob2,prob3=toaster(out[0][2],out[1][2],out[2][2])
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("2-gange med ikkenoget")
 
-                prob1 = "{}".format(prob1)
-                prob2 = "{}".format(prob2)
-                prob3 = "{}".format(prob3)
+                    analyzevalues(cleaned1,cleaned2,cleaned3,prob1,prob2,prob3)
 
-                analyzevalues(cleaned1,cleaned2,cleaned3,prob1,prob2,prob3)
+                if cleaned3 == "toaster":
+                    if out[2][2] > 0 and out[2][2] < 30:
+                        prob = out[2][2] * 1.5
+                        prob1,prob2,prob3=toaster(out[0][2],out[1][2],prob)
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("3- gange med 1.5")
+                    elif out[2][2] >= 30 and out[2][2] < 50:
+                        prob = out[2][2] * 1.3
+                        prob1,prob2,prob3=toaster(out[0][2],out[1][2],prob)
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("3- gange med 1.3")
+                    elif out[2][2] >= 50 and out[2][2] < 70:
+                        prob = out[2][2] * 1.2
+                        prob1,prob2,prob3=toaster(out[0][2],out[1][2],prob)
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("3 - gange med 1.2")
+                    else:
+                        prob1,prob2,prob3=toaster(out[0][2],out[1][2],out[2][2])
+                        prob1 = str("{:.2%}".format(prob1))
+                        prob2 = str("{:.2%}".format(prob2))
+                        prob3 = str("{:.2%}".format(prob3))
+                        cleaned1 = "{}".format(cleaned1)
+                        cleaned2 = "{}".format(cleaned2)
+                        cleaned3 = "{}".format(cleaned3)
+                        prob1 = "{}".format(prob1)
+                        prob2 = "{}".format(prob2)
+                        prob3 = "{}".format(prob3)
+                        print("gange med ikkenoget")
+
+                    analyzevalues(cleaned1,cleaned2,cleaned3,prob1,prob2,prob3)
+
+                else:
+                    prob1 = str("{:.2%}".format(out[0][2]))
+                    prob2 = str("{:.2%}".format(out[1][2]))
+                    prob3 = str("{:.2%}".format(out[2][2]))
+                    cleaned1 = "{}".format(cleaned1)
+                    cleaned2 = "{}".format(cleaned2)
+                    cleaned3 = "{}".format(cleaned3)
+                    prob1 = "{}".format(prob1)
+                    prob2 = "{}".format(prob2)
+                    prob3 = "{}".format(prob3)
+
+                    analyzevalues(cleaned1,cleaned2,cleaned3,prob1,prob2,prob3)
 
         else:
             break
@@ -154,13 +316,43 @@ def analyzevalues(clean1,clean2,clean3,prb1,prb2,prb3):
     global value3
     value3 = prb3
 
+def toaster(tal1,tal2,tal3):
+    print("før",tal1,tal2,tal3)
+    prob1 = tal1
+
+    OldValue = tal2
+    Oldmin = 0
+    NewMax=100
+    NewMin = prob1
+    OldMax = 100
+    OldMin = 0
+
+    prob2 = (((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin
+    prob2 = prob2 - prob1
+
+    OldValue1 = tal3
+    Oldmin1 = 0
+    NewMax1=100
+    NewMin1 = prob1 + prob2
+    OldMax1 = 100
+    OldMin1 = 0
+
+    prob3 = (((OldValue1 - OldMin1) * (NewMax1 - NewMin1)) / (OldMax1 - OldMin1)) + NewMin1
+    prob3 = prob3 - prob2 - prob1
+
+    print("efter",prob1,prob2,prob3)
+
+    return prob1, prob2, prob3
 
 def run():
     print("started")
     # Assigning our static_back to None
     static_back = None
     timer = 0
-    
+    # Create a blank image
+
+
+
     while True:
         ret, frame = video_capture.read()
         frame = cv2.flip(frame,1)
@@ -182,6 +374,7 @@ def run():
         pil_im = Image.fromarray(cv2_im_rgb)
 
         draw = ImageDraw.Draw(pil_im)
+
 
         # # Outline 1. text with black
         # draw.text((4-1, 325), "1.", font=font, fill=(0))
@@ -245,13 +438,21 @@ def run():
         draw.text((24, 656), value3, font=font1)
 
 
+
+
         # Get back the image to OpenCV
         cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
 
+
         # Show window if there is a difference from the first frame,
         # Otherwise show infoscreen
+
         (score, diff) = compare_ssim(static_back, gray, full=True)
 
+        # cv2.imshow('window',blackimgprocessed)
+        # k = cv2.waitKey(5) & 0xFF
+        # if k == ord('q'):
+        #     break
         if score >= 0.9 :
             timer+=1
             if timer > 25 :
