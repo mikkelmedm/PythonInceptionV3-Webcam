@@ -33,7 +33,7 @@ font4 = ImageFont.truetype("FiraSans-BoldItalic.ttf", 22)
 font5 = ImageFont.truetype("FiraSans-Regular.ttf", 15)
 
 
-blackimg = np.zeros([720,1280,3],dtype=np.uint8)
+blackimg = np.zeros([1080,1920,3],dtype=np.uint8)
 blackimg.fill(255)
 blackimgimg = cv2.cvtColor(blackimg,cv2.COLOR_BGR2RGB)
 
@@ -45,7 +45,7 @@ drawblack = ImageDraw.Draw(pil_im_black)
 # Draw the text of infoscreen:
 drawblack.text((70, 20), "Überliste den Algorithmus", font=font2, fill=(0))
 drawblack.text((70, 45), "Tricking the Algorithm", font=font4, fill=(0))
-drawblack.text((70, 99), "Støj (Andreas Refsgaard, Lasse Korsgaard) | Kopenhagen, Dänemark | 2018)", font=font5, fill=(0))
+drawblack.text((70, 99), "Støj (Andreas Refsgaard, Lasse Korsgaard, Mikkel Loose) | Kopenhagen, Dänemark | 2018)", font=font5, fill=(0))
 
 drawblack.text((70, 130), "Menschen können Bilder recht problemlos deuten, auch wenn", font=font11, fill=(0))
 drawblack.text((70, 152), "Größe, Maßstab und Position der darauf gezeigten Objekte ", font=font11, fill=(0))
@@ -75,8 +75,8 @@ blackimgprocessed = cv2.cvtColor(np.array(pil_im_black), cv2.COLOR_RGB2BGR)
 
 video_capture = cv2.VideoCapture(0)
 video_capture.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
-video_capture.set(3,2000) # set width - here it is set to max resolution
-video_capture.set(4,2000)   # set height - here it is set to max reoslution
+video_capture.set(3,2600) # set width - here it is set to max resolution
+video_capture.set(4,2600)   # set height - here it is set to max reoslution
 video_capture.set(10, 150  ) # brightness     min: 0   , max: 255 , increment:1
 # video_capture.set(11, 50   ) # contrast       min: 0   , max: 255 , increment:1
 # video_capture.set(12, 70   ) # saturation     min: 0   , max: 255 , increment:1
@@ -375,55 +375,6 @@ def run():
 
         draw = ImageDraw.Draw(pil_im)
 
-
-        # # Outline 1. text with black
-        # draw.text((4-1, 325), "1.", font=font, fill=(0))
-        # draw.text((4+1, 325), "1.", font=font, fill=(0))
-        # draw.text((4, 325-1), "1.", font=font, fill=(0))
-        # draw.text((4, 325+1), "1.", font=font, fill=(0))
-        #
-        # draw.text((24-1, 325), text1, font=font, fill=(0))
-        # draw.text((24+1, 325), text1, font=font, fill=(0))
-        # draw.text((24, 325-1), text1, font=font, fill=(0))
-        # draw.text((24, 325+1), text1, font=font, fill=(0))
-        #
-        # draw.text((24-1, 351), value1, font=font1, fill=(0))
-        # draw.text((24+1, 351), value1, font=font1, fill=(0))
-        # draw.text((24, 351-1), value1, font=font1, fill=(0))
-        # draw.text((24, 351+1), value1, font=font1, fill=(0))
-        #
-        # # Outline 2. text with black
-        # draw.text((4-1, 375), "2.", font=font, fill=(0))
-        # draw.text((4+1, 375), "2.", font=font, fill=(0))
-        # draw.text((4, 375-1), "2.", font=font, fill=(0))
-        # draw.text((4, 375+1), "2.", font=font, fill=(0))
-        #
-        # draw.text((24-1, 375), text2, font=font, fill=(0))
-        # draw.text((24+1, 375), text2, font=font, fill=(0))
-        # draw.text((24, 375-1), text2, font=font, fill=(0))
-        # draw.text((24, 375+1), text2, font=font, fill=(0))
-        #
-        # draw.text((24-1, 401), value2, font=font1, fill=(0))
-        # draw.text((24+1, 401), value2, font=font1, fill=(0))
-        # draw.text((24, 401-1), value2, font=font1, fill=(0))
-        # draw.text((24, 401+1), value2, font=font1, fill=(0))
-        #
-        # # Outline 3. text with black
-        # draw.text((4-1, 430), "3.", font=font, fill=(0))
-        # draw.text((4+1, 430), "3.", font=font, fill=(0))
-        # draw.text((4, 430-1), "3.", font=font, fill=(0))
-        # draw.text((4, 430+1), "3.", font=font, fill=(0))
-        #
-        # draw.text((24-1, 430), text3, font=font, fill=(0))
-        # draw.text((24+1, 430), text3, font=font, fill=(0))
-        # draw.text((24, 430-1), text3, font=font, fill=(0))
-        # draw.text((24, 430+1), text3, font=font, fill=(0))
-        #
-        # draw.text((24-1, 456), value3, font=font1, fill=(0))
-        # draw.text((24+1, 456), value3, font=font1, fill=(0))
-        # draw.text((24, 456-1), value3, font=font1, fill=(0))
-        # draw.text((24, 456+1), value3, font=font1, fill=(0))
-
         # Draw the text of the classifier
         draw.text((4, 525), "1.", font=font)
         draw.text((24, 525), text1, font=font)
@@ -436,8 +387,6 @@ def run():
         draw.text((4, 630), "3.", font=font)
         draw.text((24, 630), text3, font=font)
         draw.text((24, 656), value3, font=font1)
-
-
 
 
         # Get back the image to OpenCV
