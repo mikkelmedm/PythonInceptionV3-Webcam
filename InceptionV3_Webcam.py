@@ -33,50 +33,11 @@ font4 = ImageFont.truetype("FiraSans-BoldItalic.ttf", 22)
 font5 = ImageFont.truetype("FiraSans-Regular.ttf", 15)
 
 
-blackimg = np.zeros([1080,1920,3],dtype=np.uint8)
-blackimg.fill(255)
-blackimgimg = cv2.cvtColor(blackimg,cv2.COLOR_BGR2RGB)
-
-#Pass the image to PIL
-pil_im_black = Image.fromarray(blackimgimg)
-
-drawblack = ImageDraw.Draw(pil_im_black)
-
-# Draw the text of infoscreen:
-drawblack.text((170, 20), "Überliste den Algorithmus", font=font2, fill=(0))
-drawblack.text((170, 45), "Tricking the Algorithm", font=font4, fill=(0))
-drawblack.text((170, 99), "Støj (Andreas Refsgaard, Lasse Korsgaard, Mikkel Loose) | Kopenhagen, Dänemark | 2018)", font=font5, fill=(0))
-
-drawblack.text((170, 130), "Menschen können Bilder recht problemlos deuten, auch wenn", font=font11, fill=(0))
-drawblack.text((170, 152), "Größe, Maßstab und Position der darauf gezeigten Objekte ", font=font11, fill=(0))
-drawblack.text((170, 174), "eher unüblich sind. Damit eine Künstliche Intelligenz Bilder", font=font11, fill=(0))
-drawblack.text((170, 196), "sicher analysiert, muss sie ausgiebig trainiert werden.", font=font11, fill=(0))
-drawblack.text((170, 218), "Durch den Einsatz von maschinellem Lernen funktioniert", font=font11, fill=(0))
-drawblack.text((170, 240), "das heute schon recht zuverlässig. Jedoch kann Erkennungssoftware", font=font11, fill=(0))
-drawblack.text((170, 262), "schon durch kleine Änderungen in der Bildvorlage", font=font11, fill=(0))
-drawblack.text((170, 284), "getäuscht werden. Durch solche Fehlanalysen können falsche", font=font11, fill=(0))
-drawblack.text((170, 306), "Behauptungen entstehen und Personen geschädigt werden.", font=font11, fill=(0))
-drawblack.text((170, 350), "Die Anwendung macht spielerisch auf das Problem aufmerksam.", font=font11, fill=(0))
-drawblack.text((170, 372), "Teste es hier selbst!", font=font11, fill=(0))
-
-drawblack.text((170, 416), "People can interpret images fairly easily, even if the size,", font=font3, fill=(0))
-drawblack.text((170, 438), "scale and position of the objects being shown are unusual.", font=font3, fill=(0))
-drawblack.text((170, 460), "To ensure that artificial intelligence can analyse images", font=font3, fill=(0))
-drawblack.text((170, 482), "accurately, it must be extensively trained. This is already", font=font3, fill=(0))
-drawblack.text((170, 504), "fairly reliable with the help of machine learning. But", font=font3, fill=(0))
-drawblack.text((170, 526), "recognition software can be »fooled« by minor changes", font=font3, fill=(0))
-drawblack.text((170, 548), "to the reference images alone. Inaccurate analyses can", font=font3, fill=(0))
-drawblack.text((170, 570), "result in false accusations and damage to individuals.", font=font3, fill=(0))
-drawblack.text((170, 614), "This application highlights the problem playfully.", font=font3, fill=(0))
-drawblack.text((170, 636), "Test it here yourself!", font=font3, fill=(0))
-
-blackimgprocessed = cv2.cvtColor(np.array(pil_im_black), cv2.COLOR_RGB2BGR)
-
 
 video_capture = cv2.VideoCapture(0)
 video_capture.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
-video_capture.set(3,2600) # set width - here it is set to max resolution
-video_capture.set(4,2600)   # set height - here it is set to max reoslution
+video_capture.set(3,800) # set width - here it is set to max resolution
+video_capture.set(4,600)   # set height - here it is set to max reoslution
 video_capture.set(10, 150  ) # brightness     min: 0   , max: 255 , increment:1
 # video_capture.set(11, 50   ) # contrast       min: 0   , max: 255 , increment:1
 # video_capture.set(12, 70   ) # saturation     min: 0   , max: 255 , increment:1
@@ -84,6 +45,16 @@ video_capture.set(10, 150  ) # brightness     min: 0   , max: 255 , increment:1
 video_capture.set(15, -2   ) # exposure       min: -7  , max: -1  , increment:1
 # video_capture.set(17, 5000 ) # white balance
 
+video_capture1 = cv2.VideoCapture(0)
+video_capture1.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
+video_capture1.set(3,1920) # set width - here it is set to max resolution
+video_capture1.set(4,1080)   # set height - here it is set to max reoslution
+video_capture1.set(10, 150  ) # brightness     min: 0   , max: 255 , increment:1
+# video_capture.set(11, 50   ) # contrast       min: 0   , max: 255 , increment:1
+# video_capture.set(12, 70   ) # saturation     min: 0   , max: 255 , increment:1
+# video_capture.set(14, 50   ) # gain           min: 0   , max: 127 , increment:1
+video_capture1.set(15, -2   ) # exposure       min: -7  , max: -1  , increment:1
+# video_capture.set(17, 5000 ) # white balance
 
 
 def analyze():
@@ -351,71 +322,44 @@ def run():
     timer = 0
     # Create a blank image
 
-
-
     while True:
-        ret, frame = video_capture.read()
+        ret, frame = video_capture1.read()
         frame = cv2.flip(frame,1)
         cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
         cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
 
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        # In first iteration we assign the value
-        # of static_back to our first frame
-        if static_back is None:
-            static_back = gray
-            continue
+        blackimg = np.zeros([180,1280,3],dtype=np.uint8)
+        blackimg.fill(255)
+        blackimgimg = cv2.cvtColor(blackimg,cv2.COLOR_BGR2RGB)
 
-        # Convert the image to RGB (OpenCV uses BGR)
-        cv2_im_rgb = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+        #Pass the image to PIL
+        pil_im_black = Image.fromarray(blackimgimg)
 
-        # Pass the image to PIL
-        pil_im = Image.fromarray(cv2_im_rgb)
+        drawblack = ImageDraw.Draw(pil_im_black)
 
-        draw = ImageDraw.Draw(pil_im)
 
         # Draw the text of the classifier
-        draw.text((4, 525), "1.", font=font)
-        draw.text((24, 525), text1, font=font)
-        draw.text((24, 551), value1, font=font1)
+        drawblack.text((4, 25), "1.", font=font, fill=(0,0,0))
+        drawblack.text((24, 25), text1, font=font, fill=(0,0,0))
+        drawblack.text((24, 51), value1, font=font1, fill=(0,0,0))
 
-        draw.text((4, 575), "2.", font=font)
-        draw.text((24, 575), text2, font=font)
-        draw.text((24, 601), value2, font=font1)
+        drawblack.text((4, 75), "2.", font=font, fill=(0,0,0))
+        drawblack.text((24, 75), text2, font=font, fill=(0,0,0))
+        drawblack.text((24, 101), value2, font=font1, fill=(0,0,0))
 
-        draw.text((4, 630), "3.", font=font)
-        draw.text((24, 630), text3, font=font)
-        draw.text((24, 656), value3, font=font1)
+        drawblack.text((4, 130), "3.", font=font, fill=(0,0,0))
+        drawblack.text((24, 130), text3, font=font, fill=(0,0,0))
+        drawblack.text((24, 156), value3, font=font1, fill=(0,0,0))
 
+        blackimgprocessed = cv2.cvtColor(np.array(pil_im_black), cv2.COLOR_RGB2BGR)
 
-        # Get back the image to OpenCV
-        cv2_im_processed = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
+        numpy_horizontal = np.vstack((frame, blackimgprocessed))
 
-
-        # Show window if there is a difference from the first frame,
-        # Otherwise show infoscreen
-
-        (score, diff) = compare_ssim(static_back, gray, full=True)
-
-        # cv2.imshow('window',blackimgprocessed)
-        # k = cv2.waitKey(5) & 0xFF
-        # if k == ord('q'):
-        #     break
-        if score >= 0.9 :
-            timer+=1
-            if timer > 25 :
-                cv2.imshow('window',blackimgprocessed)
-                k = cv2.waitKey(5) & 0xFF
-                print("slærm",timer)
-                if k == ord('q'):
-                    break
-        else:
-             timer = 0
-             cv2.imshow('window', cv2_im_processed)
-             k = cv2.waitKey(5) & 0xFF
-             if k == ord('q'):
-                 break
+        cv2.imshow('window', numpy_horizontal)
+        k = cv2.waitKey(5) & 0xFF
+        if k == ord('q'):
+            break
 
 if __name__ == "__main__":
 
