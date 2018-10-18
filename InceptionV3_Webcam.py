@@ -324,7 +324,7 @@ def run():
 
     while True:
         ret, frame = video_capture1.read()
-        frame = cv2.flip(frame,1)
+        #frame = cv2.flip(frame,1)
         cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
         cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
 
