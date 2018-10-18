@@ -329,7 +329,7 @@ def run():
         cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
 
 
-        blackimg = np.zeros([180,1280,3],dtype=np.uint8)
+        blackimg = np.zeros([180,1920,3],dtype=np.uint8)
         blackimg.fill(255)
         blackimgimg = cv2.cvtColor(blackimg,cv2.COLOR_BGR2RGB)
 
