@@ -102,7 +102,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("gange med 1.5")
                     elif out[0][2] >= 30 and out[0][2] < 50:
                         prob = out[0][2] * 1.3
                         prob1,prob2,prob3=toaster(prob,out[1][2],out[2][2])
@@ -115,7 +114,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("gange med 1.3")
                     elif out[0][2] >= 50 and out[0][2] < 70:
                         prob = out[0][2] * 1.2
                         prob1,prob2,prob3=toaster(prob,out[1][2],out[2][2])
@@ -128,7 +126,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("gange med 1.2")
                     else:
                         prob1,prob2,prob3=toaster(out[0][2],out[1][2],out[2][2])
                         prob1 = str("{:.2%}".format(prob1))
@@ -140,7 +137,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("gange med ikkenoget")
 
                     analyzevalues(cleaned1,cleaned2,cleaned3,prob1,prob2,prob3)
 
@@ -157,7 +153,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("2-gange med 1.5")
                     elif out[1][2] >= 30 and out[1][2] < 50:
                         prob = out[1][2] * 1.3
                         prob1,prob2,prob3=toaster(out[0][2],prob,out[2][2])
@@ -170,7 +165,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("2-gange med 1.3")
                     elif out[1][2] >= 50 and out[1][2] < 70:
                         prob = out[1][2] * 1.2
                         prob1,prob2,prob3=toaster(out[0][2],prob,out[2][2])
@@ -183,7 +177,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("2-gange med 1.2")
                     else:
                         prob1,prob2,prob3=toaster(out[0][2],out[1][2],out[2][2])
                         prob1 = str("{:.2%}".format(prob1))
@@ -195,7 +188,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("2-gange med ikkenoget")
 
                     analyzevalues(cleaned1,cleaned2,cleaned3,prob1,prob2,prob3)
 
@@ -212,7 +204,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("3- gange med 1.5")
                     elif out[2][2] >= 30 and out[2][2] < 50:
                         prob = out[2][2] * 1.3
                         prob1,prob2,prob3=toaster(out[0][2],out[1][2],prob)
@@ -225,7 +216,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("3- gange med 1.3")
                     elif out[2][2] >= 50 and out[2][2] < 70:
                         prob = out[2][2] * 1.2
                         prob1,prob2,prob3=toaster(out[0][2],out[1][2],prob)
@@ -238,7 +228,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("3 - gange med 1.2")
                     else:
                         prob1,prob2,prob3=toaster(out[0][2],out[1][2],out[2][2])
                         prob1 = str("{:.2%}".format(prob1))
@@ -250,7 +239,6 @@ def analyze():
                         prob1 = "{}".format(prob1)
                         prob2 = "{}".format(prob2)
                         prob3 = "{}".format(prob3)
-                        print("gange med ikkenoget")
 
                     analyzevalues(cleaned1,cleaned2,cleaned3,prob1,prob2,prob3)
 
@@ -288,7 +276,6 @@ def analyzevalues(clean1,clean2,clean3,prb1,prb2,prb3):
     value3 = prb3
 
 def toaster(tal1,tal2,tal3):
-    print("før",tal1,tal2,tal3)
     prob1 = tal1
 
     OldValue = tal2
@@ -311,20 +298,15 @@ def toaster(tal1,tal2,tal3):
     prob3 = (((OldValue1 - OldMin1) * (NewMax1 - NewMin1)) / (OldMax1 - OldMin1)) + NewMin1
     prob3 = prob3 - prob2 - prob1
 
-    print("efter",prob1,prob2,prob3)
-
     return prob1, prob2, prob3
 
 def run():
     print("started")
-    # Assigning our static_back to None
-    static_back = None
-    timer = 0
-    # Create a blank image
 
     while True:
         ret, frame = video_capture1.read()
-        #frame = cv2.flip(frame,1)
+        # If the frame should be flipped or not:
+        #frame = cv2.flip(frame,1) 
         cv2.namedWindow("window", cv2.WND_PROP_FULLSCREEN)
         cv2.setWindowProperty("window",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
 
