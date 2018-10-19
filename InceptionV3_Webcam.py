@@ -33,7 +33,7 @@ font4 = ImageFont.truetype("FiraSans-BoldItalic.ttf", 22)
 font5 = ImageFont.truetype("FiraSans-Regular.ttf", 15)
 
 
-
+# the cam used for classification:
 video_capture = cv2.VideoCapture(0)
 video_capture.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
 video_capture.set(3,800) # set width - here it is set to max resolution
@@ -45,6 +45,7 @@ video_capture.set(10, 150  ) # brightness     min: 0   , max: 255 , increment:1
 video_capture.set(15, -2   ) # exposure       min: -7  , max: -1  , increment:1
 # video_capture.set(17, 5000 ) # white balance
 
+# the cam showing on screen:
 video_capture1 = cv2.VideoCapture(0)
 video_capture1.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
 video_capture1.set(3,1920) # set width - here it is set to max resolution
