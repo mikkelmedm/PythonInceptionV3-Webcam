@@ -8,7 +8,7 @@ https://www.python.org/ftp/python/3.6.5/python-3.6.5rc1-amd64.exe
 - In the installer, check the box "Add Python 3.6 to PATH" and press install now:
 ![alt text](https://www.howtogeek.com/wp-content/uploads/2017/05/ximg_591a18a4aed8c.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.8f1lV7V3C4.png)
 
-To run go to command prompt and enter the folder by:
+To run, go to command prompt and enter the folder by:
 ```
 cd PythonInceptionV3-Webcam-master
 ```
