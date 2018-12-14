@@ -27,7 +27,7 @@ Then press ctrl+c in the Command prompt window to kill the process entirely.
 
 Everything is now installed, and the program can be runned by abovementioned method.
 
-#Examples:
+# Examples:
 
 ![alt text](ballpoint.png)
 
